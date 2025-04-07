@@ -10,10 +10,11 @@ import {
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import {useAuth} from "../../contexts/auth/useAuth"
+import {useAuth} from "../../contexts/auth/use-auth"
 import {useSnackbar} from "notistack"
 import {useNavigate} from "react-router-dom"
-import AuthLayout from "../../layouts/AuthLayout"
+import {getResponseError} from "../../utils/api-helper"
+import AuthLayout from '../../layouts/auth-layout'
 
 const LoginPage = () => {
   const {login} = useAuth()
@@ -38,7 +39,7 @@ const LoginPage = () => {
       await login(data)
       navigate("/dashboard")
     } catch (error) {
-      enqueueSnackbar(error, {
+      enqueueSnackbar(getResponseError(error), {
         variant: 'error'
       })
     }

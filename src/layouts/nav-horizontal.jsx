@@ -1,6 +1,6 @@
 import { Tabs, Tab, Box } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
-import navConfig from './navConfig'
+import navConfig from '../layouts/nav-config'
 
 export default function NavHorizontal() {
   const { pathname } = useLocation()

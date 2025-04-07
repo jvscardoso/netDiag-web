@@ -1,6 +1,6 @@
 import { Box, Container } from '@mui/material'
-import Header from './Header'
-import NavHorizontal from './NavHorizontal'
+import Header from '../layouts/header'
+import NavHorizontal from '../layouts/nav-horizontal'
 
 export default function MainLayout({ children }) {
   return (

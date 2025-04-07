@@ -1,16 +1,13 @@
 import React from 'react'
 import {Container, Stack, Typography} from "@mui/material"
-import {useAuth} from "../../contexts/auth/use-auth"
 import CustomBreadcrumbs from "../../components/custom-breadcrumbs/"
 
-const DashboardPage = () => {
-  const { user } = useAuth()
-
+const UsersPage = () => {
   return (
     <Container maxWidth={'xl'}>
       <CustomBreadcrumbs
-        heading={`Bem vindo, ${user.name}`}
-        links={[{name: 'Home'}]}
+        heading="Usuários"
+        links={[{ name: 'Home', href: '/dashboard' }, { name: 'Usuários' }]}
         sx={{
           my: {xs: 3, md: 5}
         }}
@@ -18,11 +15,11 @@ const DashboardPage = () => {
 
       <Stack>
         <Typography>
-          Home
+          Listagem de usuários
         </Typography>
       </Stack>
     </Container>
   )
 }
 
-export default DashboardPage
+export default UsersPage

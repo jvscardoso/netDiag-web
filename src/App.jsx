@@ -1,5 +1,5 @@
 import {CssBaseline} from "@mui/material"
-import {AuthProvider} from "./contexts/auth/AuthProvider"
+import {AuthProvider} from "./contexts/auth/auth-provider"
 import {SnackbarProvider} from 'notistack'
 import Router from "./routes/index"
 

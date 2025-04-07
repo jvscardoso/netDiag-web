@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
-import MainLayout from '../layouts/MainLayout'
+import MainLayout from '../layouts/main-layout'
 import { LoadingScreen } from '../components/loading-screen'
 
 const DashboardPage = lazy(() => import('../pages/dashboard'))

@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useCallback, useMemo } from 'react'
 import { setSession, isValidToken } from './utils'
 import api from '../../utils/axios'
-import AuthContext from './AuthContext'
+import AuthContext from './auth-context'
 
 const initialState = {
   user: null,
@@ -33,7 +33,7 @@ export function AuthProvider({ children }) {
     if (accessToken && isValidToken(accessToken)) {
       setSession(accessToken)
       try {
-        const response = await api.get('/auth/me')
+        const response = await api.get('/me')
         const user = response.data
 
         dispatch({
@@ -53,7 +53,6 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = useCallback(async (data) => {
-    console.log('provider', data)
     const response = await api.post('/auth/login', data)
     const { access_token: accessToken, name, role, email } = response.data
 
