@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Stack, Typography} from "@mui/material"
-import {useAuth} from "../../contexts/auth/useAuth.js";
-import {useRouter} from "../../hooks/use-router.js";
+import {useAuth} from "../../contexts/auth/useAuth"
+import {useRouter} from "../../hooks/use-router"
 
 const DashboardPage = () => {
   const { logout } = useAuth()

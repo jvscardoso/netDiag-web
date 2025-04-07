@@ -1,9 +1,7 @@
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import {CssBaseline} from "@mui/material";
-import DashboardPage from "./pages/dashboard";
-import LoginPage from "./pages/login/login";
-import {AuthProvider} from "./contexts/auth/AuthProvider.jsx";
+import {CssBaseline} from "@mui/material"
+import {AuthProvider} from "./contexts/auth/AuthProvider"
 import {SnackbarProvider} from 'notistack'
+import Router from "./routes/index"
 
 function App() {
   return (
@@ -14,16 +12,11 @@ function App() {
           vertical: 'top',
           horizontal: 'right'
         }}>
-        <Router>
           <CssBaseline/>
-          <Routes>
-            <Route path="/" element={<LoginPage/>}/>
-            <Route path="/dashboard" element={<DashboardPage/>}/>
-          </Routes>
-        </Router>
+          <Router />
       </SnackbarProvider>
     </AuthProvider>
-  );
+  )
 }
 
-export default App;
+export default App

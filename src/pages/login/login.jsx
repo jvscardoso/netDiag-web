@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
   Container,
   TextField,
@@ -6,23 +6,24 @@ import {
   Typography,
   Box,
   Paper,
-} from "@mui/material";
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import {useAuth} from "../../contexts/auth/useAuth.js";
-import {useSnackbar} from "notistack";
-import {useNavigate} from "react-router-dom";
+} from "@mui/material"
+import {useForm} from "react-hook-form"
+import {yupResolver} from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import {useAuth} from "../../contexts/auth/useAuth"
+import {useSnackbar} from "notistack"
+import {useNavigate} from "react-router-dom"
+import AuthLayout from "../../layouts/AuthLayout"
 
 const LoginPage = () => {
-  const {login} = useAuth();
+  const {login} = useAuth()
   const {enqueueSnackbar} = useSnackbar()
   const navigate = useNavigate()
 
   const loginSchema = yup.object().shape({
     email: yup.string().email("E-mail inválido").required("E-mail é obrigatório"),
     password: yup.string().required("Senha é obrigatória"),
-  });
+  })
 
   const {
     register,
@@ -30,59 +31,61 @@ const LoginPage = () => {
     formState: {errors, isSubmitting},
   } = useForm({
     resolver: yupResolver(loginSchema),
-  });
+  })
 
   const onSubmit = async (data) => {
     try {
-      await login(data);
+      await login(data)
       navigate("/dashboard")
     } catch (error) {
       enqueueSnackbar(error, {
         variant: 'error'
       })
     }
-  };
+  }
 
   return (
-    <Container maxWidth="sm">
-      <Paper elevation={3} sx={{padding: 4, marginTop: 8}}>
-        <Typography variant="h5" gutterBottom>
-          Login
-        </Typography>
-        <Box
-          component="form"
-          onSubmit={handleSubmit(onSubmit)}
-          sx={{display: "flex", flexDirection: "column", gap: 2}}
-        >
-          <TextField
-            label="Email"
-            {...register("email")}
-            error={!!errors.email}
-            helperText={errors.email?.message}
-            fullWidth
-          />
-
-          <TextField
-            label="Senha"
-            type="password"
-            {...register("password")}
-            error={!!errors.password}
-            helperText={errors.password?.message}
-            fullWidth
-          />
-
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            disabled={isSubmitting}
+    <AuthLayout>
+      <Container maxWidth="sm">
+        <Paper elevation={3} sx={{padding: 4, marginTop: 8}}>
+          <Typography variant="h5" gutterBottom>
+            Login
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit(onSubmit)}
+            sx={{display: "flex", flexDirection: "column", gap: 2}}
           >
-            Entrar
-          </Button>
-        </Box>
-      </Paper>
-    </Container>
-  );
-};
+            <TextField
+              label="Email"
+              {...register("email")}
+              error={!!errors.email}
+              helperText={errors.email?.message}
+              fullWidth
+            />
 
-export default LoginPage;
+            <TextField
+              label="Senha"
+              type="password"
+              {...register("password")}
+              error={!!errors.password}
+              helperText={errors.password?.message}
+              fullWidth
+            />
+
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              Entrar
+            </Button>
+          </Box>
+        </Paper>
+      </Container>
+    </AuthLayout>
+  )
+}
+
+export default LoginPage

@@ -1,8 +1,8 @@
-import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export function useRouter() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const router = useMemo(
     () => ({
@@ -13,7 +13,7 @@ export function useRouter() {
       replace: (href) => navigate(href, { replace: true }),
     }),
     [navigate]
-  );
+  )
 
-  return router;
+  return router
 }

@@ -1,5 +1,5 @@
-import axios from "axios";
-import {HOST_API} from "../../config-global.js";
+import axios from "axios"
+import {HOST_API} from "../../config-global"
 
 const api = axios.create({
   baseURL: HOST_API,
@@ -9,11 +9,11 @@ const api = axios.create({
 })
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token")
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token}`
   }
-  return config;
-});
+  return config
+})
 
-export default api;
+export default api

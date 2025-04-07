@@ -1,5 +1,5 @@
 import { min } from 'lodash'
-import api from "../../utils/axios.js";
+import api from "../../utils/axios"
 
 function jwtDecode(token) {
   const base64Url = token.split('.')[1]
@@ -62,6 +62,6 @@ export const setSession = (accessToken) => {
 
     delete api.defaults.headers.common.Authorization
   }
-};
+}
 
 
