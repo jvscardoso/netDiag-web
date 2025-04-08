@@ -3,7 +3,6 @@ import {
   Container,
   Typography,
   Card,
-  CardContent,
   Avatar,
   Stack,
   Divider,
@@ -70,7 +69,7 @@ const ProfilePage = () => {
           </Stack>
 
           <Stack direction="row" alignItems="center" spacing={1}>
-            <Iconify icon="mdi:shield-account" width={20}/>
+            <Iconify icon="uim:calendar" width={20}/>
             <Typography variant="body1">
               <strong>Criado em:</strong> {format(parseISO(user?.created_at), 'dd/MM/yyyy')}
             </Typography>
