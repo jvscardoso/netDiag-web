@@ -7,13 +7,10 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  Stack,
-  Typography
 } from '@mui/material'
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs/'
 import CustomDataTable from '../../components/custom-data-table/index'
 import {format, parseISO} from 'date-fns'
-import {useTheme} from '@mui/material/styles'
 import {Info} from 'phosphor-react'
 import UserDetails from '../../components/user-details/index'
 import {ROLE_LABELS} from '../../utils/user-enums'
@@ -21,13 +18,11 @@ import {useNavigate} from 'react-router-dom'
 import Iconify from '../../components/iconify/index'
 
 const UsersPage = () => {
-  const theme = useTheme()
   const table = useRef()
   const navigate = useNavigate()
 
   const [selectedUser, setSelectedUser] = useState([])
   const [openDetails, setOpenDetails] = useState(false)
-  const [loading, setLoading] = useState(false)
 
   const handleGoBack = () => {
     window.history.back()
