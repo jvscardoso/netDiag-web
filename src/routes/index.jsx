@@ -4,6 +4,7 @@ import dashboardRoutes from './dashboard'
 import usersRoutes from './user'
 import diagnosticsRoutes from './diagnostics'
 import NotFoundPage from '../pages/404/index'
+import profileRoutes from './profile'
 
 export default function Router() {
   const routes = useRoutes([
@@ -17,6 +18,8 @@ export default function Router() {
     ...usersRoutes,
 
     ...diagnosticsRoutes,
+
+    ...profileRoutes,
 
     {path: '*', element: <NotFoundPage/>}
   ])
