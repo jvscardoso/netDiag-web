@@ -4,25 +4,37 @@ import MainLayout from '../layouts/main-layout'
 import {LoadingScreen} from '../components/loading-screen'
 import UsersPage from '../pages/users/index'
 import UserRegisterPage from '../pages/users/user-register'
+import AuthGuard from './auth-guard'
+import ProtectedRoute from './protected-routes'
 
 const usersRoutes = [
   {
     path: '/users',
     element: (
-      <MainLayout>
-        <Suspense fallback={<LoadingScreen/>}>
-          <Outlet/>
-        </Suspense>
-      </MainLayout>
+      <AuthGuard>
+        <MainLayout>
+          <Suspense fallback={<LoadingScreen/>}>
+            <Outlet/>
+          </Suspense>
+        </MainLayout>
+      </AuthGuard>
     ),
     children: [
       {
         index: true,
-        element: <UsersPage/>
+        element: (
+          <ProtectedRoute allowedRoles={['admin']}>
+            <UsersPage/>
+          </ProtectedRoute>
+        )
       },
       {
         path: 'create-or-update',
-        element: <UserRegisterPage/>
+        element: (
+          <ProtectedRoute allowedRoles={['admin']}>
+            <UserRegisterPage/>
+          </ProtectedRoute>
+        )
       },
     ]
   }

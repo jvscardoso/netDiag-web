@@ -34,7 +34,7 @@ const DashboardPage = () => {
   return (
     <Container maxWidth="xl">
       <CustomBreadcrumbs
-        heading={`Bem vindo, ${user.name}`}
+        heading={`Bem vindo, ${user?.name}`}
         links={[{name: 'Início'}, {name: 'Visão geral'}]}
         sx={{ my: {xs: 3, md: 5} }}
       />
