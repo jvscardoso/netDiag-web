@@ -34,15 +34,13 @@ export const tokenExpired = (exp) => {
   const currentTime = Date.now()
 
   const timeLeft = exp * 1000 - currentTime
-  const maxTime = 2147483647
+  const maxTime = 86400000
 
   clearTimeout(expiredTimer)
 
   expiredTimer = setTimeout(() => {
     alert('Sessão expirada, faça login novamente.')
-
     localStorage.removeItem('accessToken')
-
     window.location.href = "/"
   }, min([maxTime, timeLeft]))
 }

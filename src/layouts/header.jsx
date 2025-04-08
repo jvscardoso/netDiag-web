@@ -7,11 +7,9 @@ import React from "react"
 import {useRouter} from "../hooks/use-router"
 
 export default function Header() {
-  const {user, logout} = useAuth()
+  const {logout} = useAuth()
   const lgUp = useResponsive('up', 'lg')
   const router = useRouter()
-
-  console.log(user)
 
   const handleLogout = async () => {
     try {
