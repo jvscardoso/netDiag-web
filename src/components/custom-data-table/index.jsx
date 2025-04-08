@@ -1,46 +1,39 @@
-import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'react'
-import {DataGrid, GridFooterContainer} from '@mui/x-data-grid'
-import {Box, Stack, Typography} from '@mui/material'
+import React, {useEffect, useState, useImperativeHandle, forwardRef} from 'react'
+import {DataGrid} from '@mui/x-data-grid'
+import {Box, Stack} from '@mui/material'
 import api from '../../utils/axios'
+import {getResponseError} from '../../utils/api-helper'
+import {useSnackbar} from 'notistack'
 
-function CustomFooter({ rowCount }) {
-  return (
-    <GridFooterContainer>
-      <Box sx={{ pl: 2, py: 1 }}>
-        <Typography variant="body2">
-          Total de {rowCount} {rowCount === 1 ? 'item' : 'itens'}
-        </Typography>
-      </Box>
-    </GridFooterContainer>
-  )
-}
-
-const CustomDataTable = forwardRef(({ endpoint, columns, filters }, ref) => {
+const CustomDataTable = forwardRef(({endpoint, columns, filters}, ref) => {
   const [rows, setRows] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [pageSize, setPageSize] = useState(10)
-  const [rowCount, setRowCount] = useState(0)
-  const [page, setPage] = useState(0)
+  const {enqueueSnackbar} = useSnackbar()
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 10,
+  })
 
   const fetchData = async () => {
     setLoading(true)
     try {
+      const cleanedFilters = Object.fromEntries(
+        Object.entries(filters || {}).filter(([_, value]) => value !== '')
+      )
+
       const params = {
-        ...filters,
-        limit: pageSize,
-        offset: page * pageSize,
+        ...cleanedFilters,
+        page: paginationModel.page + 1,
+        limit: paginationModel.pageSize,
       }
 
-      const response = await api.get(endpoint, { params })
-      const data = response.data
+      const response = await api.get(endpoint, {params})
+      const data = response?.data
 
       setRows(data.items || data.results || [])
-      setRowCount(data.total || data.count || 0)
-      setError(null)
-    } catch (err) {
-      console.error('Erro ao carregar dados:', err)
-      setError('Erro ao carregar dados')
+    } catch (error) {
+      console.error(error)
+      enqueueSnackbar(getResponseError(error), {variant: 'error'})
     } finally {
       setLoading(false)
     }
@@ -52,41 +45,32 @@ const CustomDataTable = forwardRef(({ endpoint, columns, filters }, ref) => {
 
   useEffect(() => {
     fetchData()
-  }, [endpoint, filters, page, pageSize])
+  }, [endpoint, filters, paginationModel])
 
   return (
-    <Box sx={{ height: 500, width: '100%' }}>
-      {error ? (
-        <Typography color="error">{error}</Typography>
-      ) : (
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          loading={loading}
-          pagination
-          pageSize={pageSize}
-          page={page}
-          rowCount={rowCount}
-          paginationMode="server"
-          onPageChange={(newPage) => setPage(newPage)}
-          onPageSizeChange={(newSize) => setPageSize(newSize)}
-          pageSizeOptions={[]}
-          checkboxSelection={false}
-          disableRowSelectionOnClick
-          hideFooterSelectedRowCount
-          hideFooterPagination
-          getRowId={(row) => row.id}
-          slots={{
-            noRowsOverlay: () => (
-              <Stack height="100%" alignItems="center" justifyContent="center">
-                Não há items para exibir
-              </Stack>
-            ),
-            footer: () => <CustomFooter rowCount={rows.length} />
-          }}
-        />
-
-      )}
+    <Box sx={{height: 500, width: '100%'}}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        loading={loading}
+        pagination
+        paginationMode="server"
+        rowCount={rows.length}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
+        pageSizeOptions={[5, 10, 25, 50]}
+        checkboxSelection={false}
+        disableRowSelectionOnClick
+        hideFooterSelectedRowCount
+        getRowId={(row) => row.id}
+        slots={{
+          noRowsOverlay: () => (
+            <Stack height="100%" alignItems="center" justifyContent="center">
+              Não há itens para exibir
+            </Stack>
+          ),
+        }}
+      />
     </Box>
   )
 })

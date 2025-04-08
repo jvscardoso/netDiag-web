@@ -23,7 +23,7 @@ export default function ConfirmDialog({title, content, action, open, onClose, ca
         </Render>
       </DialogActions>
     </Dialog>
-  );
+  )
 }
 
 ConfirmDialog.defaultProps = {
@@ -39,4 +39,4 @@ ConfirmDialog.propTypes = {
   showCancelButton: PropTypes.bool,
   title: PropTypes.string,
   cancelText: PropTypes.string
-};
+}

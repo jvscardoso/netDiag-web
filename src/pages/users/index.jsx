@@ -24,10 +24,6 @@ const UsersPage = () => {
   const [selectedUser, setSelectedUser] = useState([])
   const [openDetails, setOpenDetails] = useState(false)
 
-  const handleGoBack = () => {
-    window.history.back()
-  }
-
   const handleDetails = (row) => {
     setSelectedUser(row)
     setOpenDetails(true)
@@ -94,11 +90,6 @@ const UsersPage = () => {
       <CustomBreadcrumbs
         heading="Usuários"
         links={[{name: 'Home', href: '/dashboard'}, {name: 'Usuários'}]}
-        iconButton={
-          <IconButton onClick={handleGoBack}>
-            <Iconify icon="eva:arrow-ios-back-fill" width={24} />
-          </IconButton>
-        }
         sx={{
           my: {xs: 3, md: 5}
         }}
