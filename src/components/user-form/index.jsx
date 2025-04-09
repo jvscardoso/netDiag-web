@@ -58,7 +58,7 @@ export default function UserForm({user, onSuccess}) {
           enqueueSnackbar('Usuário atualizado com sucesso', {variant: 'success'})
           onSuccess()
         } else {
-          await api.post('/users', data)
+          await api.post('/auth/register', data)
           enqueueSnackbar('Usuário criado com sucesso', {variant: 'success'})
           onSuccess()
         }

@@ -114,13 +114,12 @@ const DiagnosticFilters = forwardRef(({onFilter}, ref) => {
               label="QoS"
               endAdornment={filters.qos_filter && (
                 <InputAdornment position="end">
-                  <IconButton
-                    onClick={handleClear('qos_filter')}
-                    edge="end"
+                  <Button
+                    onClick={handleClear(field)}
                     size="small"
                   >
-                    <ClearIcon fontSize="small"/>
-                  </IconButton>
+                    Limpar
+                  </Button>
                 </InputAdornment>
               )}
             >

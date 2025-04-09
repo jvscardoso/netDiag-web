@@ -82,7 +82,7 @@ const UsersPage = () => {
   const handleSuccess = () => {
     setSelectedUser(null)
     setOpenDetails(false)
-    table.current.refresh()
+    window.location.reload()
   }
 
   return (
