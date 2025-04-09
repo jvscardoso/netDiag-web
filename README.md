@@ -1,12 +1,66 @@
-# React + Vite
+# NetDiag - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface web para visualização e análise de diagnósticos de rede.  
 
-Currently, two official plugins are available:
+## 🧠 Sobre o projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este frontend foi desenvolvido em **React + Vite**, com foco em performance, design responsivo e boas práticas de autenticação, controle de acesso e visualização de dados.  
+Permite ao usuário:
 
-## Expanding the ESLint configuration
+- Visualizar diagnósticos em tabela paginada
+- Filtrar dados por cidade, estado, latência e outros critérios
+- Alternar entre visualização em tabela e gráficos agregados
+- Gerenciar usuários (admins)
+- Autenticar e manter sessão via JWT
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tecnologias utilizadas
+
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Material UI (MUI)](https://mui.com/)
+- [ApexCharts](https://apexcharts.com/)
+- [React Router](https://reactrouter.com/)
+- [Axios](https://axios-http.com/)
+- [JWT](https://jwt.io/)
+
+## 📦 Instalação
+
+Antes de iniciar, certifique-se de que o **backend** da aplicação esteja rodando (porta padrão: `5000`).
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/jvscardoso/netDiag-web.git
+   cd netDiag-web
+   ```
+
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+3. Crie um arquivo `.env` com a seguinte variável (opcional):
+   ```env
+   VITE_API_BASE_URL=http://localhost:5000
+   ```
+
+   Se não informado, será usada a URL padrão local.
+
+4. Rode a aplicação:
+   ```bash
+   npm run dev
+   ```
+
+   Acesse: [http://localhost:5173](http://localhost:5173)
+
+
+## 🔑 Credenciais
+
+>email: admin@netdiag.io
+
+>email: user@netdiag.io
+
+>email: analyst@netdiag.io
+
+Todos os usuários usam a senha 'admin123'
+
+**Desenvolvido por [João Vitor Cardoso]**
