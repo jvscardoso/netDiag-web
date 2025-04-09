@@ -71,7 +71,7 @@ const DiagnosticsPage = () => {
       )}
 
       {currentTab === 1 && (
-        <GroupedDataPage />
+        <GroupedDataPage filters={filters} />
       )}
 
       <DiagnosticFilters

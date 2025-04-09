@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import {
   Container,
   TextField,
@@ -6,15 +6,16 @@ import {
   Typography,
   Box,
   Paper,
-} from "@mui/material"
-import {useForm} from "react-hook-form"
-import {yupResolver} from "@hookform/resolvers/yup"
-import * as yup from "yup"
-import {useAuth} from "../../contexts/auth/use-auth"
-import {useSnackbar} from "notistack"
-import {useNavigate} from "react-router-dom"
-import {getResponseError} from "../../utils/api-helper"
+} from '@mui/material'
+import {useForm} from 'react-hook-form'
+import {yupResolver} from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import {useAuth} from '../../contexts/auth/use-auth'
+import {useSnackbar} from 'notistack'
+import {useNavigate} from 'react-router-dom'
+import {getResponseError} from '../../utils/api-helper'
 import AuthLayout from '../../layouts/auth-layout'
+import Stack from '@mui/material/Stack'
 
 const LoginPage = () => {
   const {login} = useAuth()
@@ -22,8 +23,8 @@ const LoginPage = () => {
   const navigate = useNavigate()
 
   const loginSchema = yup.object().shape({
-    email: yup.string().email("E-mail inválido").required("E-mail é obrigatório"),
-    password: yup.string().required("Senha é obrigatória"),
+    email: yup.string().email('E-mail inválido').required('E-mail é obrigatório'),
+    password: yup.string().required('Senha é obrigatória'),
   })
 
   const {
@@ -37,7 +38,7 @@ const LoginPage = () => {
   const onSubmit = async (data) => {
     try {
       await login(data)
-      navigate("/dashboard")
+      navigate('/dashboard')
     } catch (error) {
       enqueueSnackbar(getResponseError(error), {
         variant: 'error'
@@ -47,43 +48,45 @@ const LoginPage = () => {
 
   return (
     <AuthLayout>
-      <Container maxWidth="sm">
-        <Paper elevation={3} sx={{padding: 4, marginTop: 8}}>
+      <Container maxWidth="lg" disableGutters>
+        <Stack alignItems="center" spacing={2}>
           <Typography variant="h5" gutterBottom>
-            Login
+            Acesse sua conta
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit(onSubmit)}
-            sx={{display: "flex", flexDirection: "column", gap: 2}}
-          >
-            <TextField
-              label="Email"
-              {...register("email")}
-              error={!!errors.email}
-              helperText={errors.email?.message}
-              fullWidth
-            />
-
-            <TextField
-              label="Senha"
-              type="password"
-              {...register("password")}
-              error={!!errors.password}
-              helperText={errors.password?.message}
-              fullWidth
-            />
-
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              disabled={isSubmitting}
+          <Paper elevation={3} sx={{padding: 4, maxWidth: 600,}}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit(onSubmit)}
+              sx={{display: 'flex', flexDirection: 'column', gap: 2}}
             >
-              Entrar
-            </Button>
-          </Box>
-        </Paper>
+              <TextField
+                label="Email"
+                {...register('email')}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+                fullWidth
+              />
+
+              <TextField
+                label="Senha"
+                type="password"
+                {...register('password')}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+                fullWidth
+              />
+
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                Entrar
+              </Button>
+            </Box>
+          </Paper>
+        </Stack>
       </Container>
     </AuthLayout>
   )

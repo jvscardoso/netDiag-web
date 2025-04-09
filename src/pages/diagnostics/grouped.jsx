@@ -5,7 +5,7 @@ import api from '../../utils/axios'
 import { getResponseError } from '../../utils/api-helper'
 import { useSnackbar } from 'notistack'
 
-const GroupedDataPage = () => {
+const GroupedDataPage = ({filters}) => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const { enqueueSnackbar } = useSnackbar()
@@ -14,7 +14,8 @@ const GroupedDataPage = () => {
     const fetchGroupedData = async () => {
       setLoading(true)
       try {
-        const response = await api.get('/diagnostics/grouped')
+        const queryParams = new URLSearchParams(filters).toString()
+        const response = await api.get(`/diagnostics/grouped?${queryParams}`)
         setData(response.data || [])
       } catch (error) {
         enqueueSnackbar(getResponseError(error), { variant: 'error' })
