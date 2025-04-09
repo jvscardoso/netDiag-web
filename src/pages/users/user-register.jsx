@@ -3,11 +3,14 @@ import {Container, IconButton} from '@mui/material'
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs'
 import UserForm from '../../components/user-form'
 import Iconify from '../../components/iconify/index'
+import {useNavigate} from 'react-router-dom'
 
 const UserRegisterPage = () => {
   const handleGoBack = () => {
     window.history.back()
   }
+
+  const navigate = useNavigate()
 
   return (
     <Container maxWidth={'xl'}>
@@ -24,7 +27,7 @@ const UserRegisterPage = () => {
         }}
       />
 
-      <UserForm/>
+      <UserForm onSuccess={() => navigate('/users')}/>
     </Container>
   )
 }

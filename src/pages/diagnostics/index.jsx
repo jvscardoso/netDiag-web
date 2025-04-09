@@ -23,7 +23,12 @@ const DiagnosticsPage = () => {
     {field: 'city', headerName: 'Cidade', flex: 1},
     {field: 'state', headerName: 'Estado', flex: 1},
     {field: 'latency_ms', headerName: 'Latencia (ms)', flex: 1},
-    {field: 'packet_loss', headerName: 'Perda de pacotes', flex: 1},
+    {
+      field: 'packet_loss',
+      headerName: 'Perda de pacotes',
+      flex: 1,
+      renderCell: (params) => `${params?.row?.packet_loss ?? 0}%`
+    },
     {field: 'quality_of_service', headerName: 'Qualidade do serviço', flex: 1},
     {
       field: 'date',

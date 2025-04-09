@@ -11,7 +11,6 @@ import {
   FormControl,
   InputLabel,
   Select,
-  IconButton,
   InputAdornment
 } from '@mui/material'
 
@@ -80,17 +79,17 @@ const DiagnosticFilters = forwardRef(({onFilter}, ref) => {
       onChange={handleChange(field)}
       size="small"
       fullWidth
-      InputProps={{
-        endAdornment: filters[field] && (
-          <InputAdornment position="end">
-            <Button
-              onClick={handleClear(field)}
-              size="small"
-            >
-              Limpar
-            </Button>
-          </InputAdornment>
-        )
+      slotProps={{
+        input: {
+          endAdornment: filters.latency_ms && (
+            <InputAdornment position="end">
+              <Button onClick={handleClear('latency_ms')} size="small">
+                Limpar
+              </Button>
+            </InputAdornment>
+          )
+        },
+        inputLabel: { shrink: true }
       }}
     />
   )
@@ -108,14 +107,14 @@ const DiagnosticFilters = forwardRef(({onFilter}, ref) => {
           <FormControl size="small" fullWidth>
             <InputLabel>QoS</InputLabel>
             <Select
-              variant="standard"
+              variant="outlined"
               value={filters.qos_filter}
               onChange={handleChange('qos_filter')}
               label="QoS"
               endAdornment={filters.qos_filter && (
                 <InputAdornment position="end">
                   <Button
-                    onClick={handleClear(field)}
+                    onClick={handleClear('qos_filter')}
                     size="small"
                   >
                     Limpar

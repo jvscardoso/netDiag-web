@@ -14,6 +14,7 @@ import api from '../../utils/axios'
 import {getResponseError} from '../../utils/api-helper'
 import Iconify from '../../components/iconify'
 import {format, parseISO} from 'date-fns'
+import {ROLE_LABELS} from '../../utils/user-enums'
 
 const ProfilePage = () => {
   const {enqueueSnackbar} = useSnackbar()
@@ -64,7 +65,7 @@ const ProfilePage = () => {
           <Stack direction="row" alignItems="center" spacing={1}>
             <Iconify icon="mdi:shield-account" width={20}/>
             <Typography variant="body1">
-              <strong>Função:</strong> {user?.role}
+              <strong>Função:</strong> {ROLE_LABELS[user?.role]}
             </Typography>
           </Stack>
 

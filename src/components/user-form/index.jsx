@@ -105,6 +105,7 @@ export default function UserForm({user, onSuccess}) {
               <TextField
                 fullWidth
                 label="Senha"
+                type="password"
                 {...register('password')}
                 error={!!errors.password}
                 helperText={errors.password?.message}
