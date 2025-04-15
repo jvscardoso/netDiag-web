@@ -55,12 +55,10 @@ Antes de iniciar, certifique-se de que o **backend** da aplicação esteja rodan
 
 ## 🔑 Credenciais
 
->email: admin@netdiag.io
+admin@netdiag.com / admin123
 
->email: user@netdiag.io
+analyst@netdiag.com / analyst123
 
->email: analyst@netdiag.io
-
-Todos os usuários usam a senha 'admin123'
+user@netdiag.com / user123
 
 **Desenvolvido por [João Vitor Cardoso]**
